@@ -1402,3 +1402,4 @@ function Kavo.CreateLib(kavName, themeList)
         return Sections
     end
     return Tabs
+return Kavo
