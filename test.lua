@@ -1,6 +1,5 @@
 --[[
-    SAPI HUB BF PVP - Tích hợp Rubu Hub UI
-    Version: Fixed
+    SAPI HUB BF PVP - Fix UI không hiển thị element
 --]]
 
 -- Khởi tạo thư viện WindUI
@@ -18,35 +17,15 @@ local ZSkillModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 -- Services
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
-local TeleportService = game:GetService("TeleportService")
 local LocalPlayer = Players.LocalPlayer
-local RunService = game:GetService("RunService")
 
--- Biến toàn cục
-local PlayerList = {"None"}
+-- Settings
 local Settings = OthersStuffsModule.LoadSettings() or {}
 
--- Lấy thông tin executor
-local executor = "Unknown"
-if syn then 
-    executor = "Synapse X"
-elseif KRNL_LOADED then 
-    executor = "KRNL"
-elseif fluxus then 
-    executor = "Fluxus"
-elseif getexecutorname then
-    local success, execName = pcall(getexecutorname)
-    if success and type(execName) == "string" then 
-        executor = execName 
-    end
-end
-
-local execStatus = (executor == "Xeno" or executor:lower():find("solara") or executor:lower():find("krnl")) and "Not Working" or "Working"
-
--- Tạo cửa sổ chính
+-- Tạo Window
 local Window = WindUI:CreateWindow({
     Title = "Sapi Hub BF PvP ˃ᴗ˂",
-    Author = " | " .. executor .. " [" .. execStatus .. "]",
+    Author = " | Velocity",
     Folder = "SapiHub",
     Size = UDim2.fromOffset(580, 460),
     Transparent = true,
@@ -57,177 +36,150 @@ local Window = WindUI:CreateWindow({
     MinimizeKey = Enum.KeyCode.M
 })
 
--- Tạo các tab
-local Tabs = {}
+-- === TAB 1: EXECUTOR STATUS ===
+local Tab1 = Window:Tab({ Title = "◇・Executor Status" })
 
--- Tab 1: Executor Status
-Tabs.Executor = Window:Tab({ Title = "◇・Executor Status" })
-local ExecSection = Tabs.Executor:Section("◈・Information")
-Tabs.Executor:Paragraph({
+-- Section
+local Section1 = Tab1:Section("◈・Information")
+
+-- Paragraph
+Tab1:Paragraph({
     Title = "Executor Information",
-    Desc = "Executor: " .. executor .. "\nStatus: " .. execStatus
+    Desc = "Executor: Velocity\nStatus: Working"
 })
 
--- Tab 2: ChangesLogs
-Tabs.Changelogs = Window:Tab({ Title = "⛓・ChangesLogs" })
-local ChangelogSection = Tabs.Changelogs:Section("✏・Updated")
-Tabs.Changelogs:Paragraph({
+-- === TAB 2: CHANGELOGS ===
+local Tab2 = Window:Tab({ Title = "⛓・ChangesLogs" })
+
+-- Section
+local Section2 = Tab2:Section("✏・Updated")
+
+-- Paragraph
+Tab2:Paragraph({
     Title = "Latest Updates",
-    Desc = "• Fixed Dropdown Save Settings ✔\n• Added Info Of Target (Name/Health) ✔\n• Optimized Script ✔\n• Improved Fps Boost ✔\n• Fixed Soul Guitar M1 in Silent aim ✔\n• Added RTX Graphic(Visual Vibes) ✔\n• Added Custom Global Text ✔\n• Added Dash No CD ✔\n• Added Remove Fog or Lava ✔\n• Added Z Skills Work(Except Godhuman Z) ✔\n• Added Fruit M1 Closet Attack ✔\n• Fixed Buddy Sword X in Silent aim ✔"
+    Desc = "• Fixed Dropdown Save Settings ✔\n• Added Info Of Target (Name/Health) ✔\n• Optimized Script ✔\n• Improved Fps Boost ✔"
 })
 
--- Tab 3: Aimbot
-Tabs.Aimbot = Window:Tab({ Title = "❖・Aimbot" })
-local AimbotSection = Tabs.Aimbot:Section("☘・Settings")
+-- === TAB 3: AIMBOT ===
+local Tab3 = Window:Tab({ Title = "❖・Aimbot" })
 
--- Aimbot Players
-local AimlockPlayersToggle = Tabs.Aimbot:Toggle({
+-- Section
+local Section3 = Tab3:Section("☘・Settings")
+
+-- Toggle 1
+local Toggle1 = Tab3:Toggle({
     Title = "・Aimlock Players",
     Desc = "Lock onto nearest player",
     Default = Settings["AimlockPlayers"] or false,
     Callback = function(state)
         AimlockModule:SetPlayerAimlock(state)
         Settings["AimlockPlayers"] = state
+        print("Aimlock Players:", state)
     end
 })
 
--- Aimlock Mini Players
-local AimlockPlayersMiniToggle = Tabs.Aimbot:Toggle({
-    Title = "・Aimlock Mini Toggle Players",
-    Desc = "Lock onto nearest player",
-    Default = Settings["AimlockPlayersMiniTogglePlayers"] or false,
-    Callback = function(state)
-        AimlockModule:SetMiniTogglePlayerAimlock(state)
-        Settings["AimlockPlayersMiniTogglePlayers"] = state
-    end
-})
-
--- Aimlock NPC
-local AimlockNPCToggle = Tabs.Aimbot:Toggle({
+-- Toggle 2
+local Toggle2 = Tab3:Toggle({
     Title = "・Aimlock NPC",
     Desc = "Lock onto nearest NPC/Boss",
     Default = Settings["AimlockNPC"] or false,
     Callback = function(state)
         AimlockModule:SetNpcAimlock(state)
         Settings["AimlockNPC"] = state
+        print("Aimlock NPC:", state)
     end
 })
 
--- Aimlock Mini NPC
-local AimlockPlayersMiniNPCToggle = Tabs.Aimbot:Toggle({
-    Title = "・Aimlock Mini Toggle NPC",
-    Desc = "Lock onto nearest NPC/Boss",
-    Default = Settings["AimlockPlayersMiniToggleNPC"] or false,
-    Callback = function(state)
-        AimlockModule:SetMiniToggleNpcAimlock(state)
-        Settings["AimlockPlayersMiniToggleNPC"] = state
-    end
-})
-
--- Prediction
-local PredictionToggle = Tabs.Aimbot:Toggle({
+-- Toggle 3
+local Toggle3 = Tab3:Toggle({
     Title = "・Prediction",
     Desc = "Predict enemy movement",
     Default = Settings["Prediction"] or false,
     Callback = function(state)
         AimlockModule:SetPrediction(state)
         Settings["Prediction"] = state
+        print("Prediction:", state)
     end
 })
 
--- Prediction Amount
-local PredictionAmountDropdown = Tabs.Aimbot:Dropdown({
+-- Dropdown
+local Dropdown1 = Tab3:Dropdown({
     Title = "・Prediction Amount",
-    Desc = "Select max Prediction for Aimlock (Default 0.1s)",
-    Values = {"0.2", "0.3", "0.4"},
+    Desc = "Select prediction time",
+    Values = {"0.1", "0.2", "0.3", "0.4"},
     Default = tostring(Settings["PredictionAmount"] or 0.1),
     Callback = function(selected)
         local num = tonumber(selected)
         if num then
             AimlockModule:SetPredictionTime(num)
             Settings["PredictionAmount"] = num
+            print("Prediction Amount:", num)
         end
     end
 })
 
--- Tab 4: Silent Aimbot
-Tabs.SilentAim = Window:Tab({ Title = "⛩・Silent Aimbot" })
-local SilentSection = Tabs.SilentAim:Section("⚓・Settings")
+-- === TAB 4: SILENT AIMBOT ===
+local Tab4 = Window:Tab({ Title = "⛩・Silent Aimbot" })
 
--- Silent Aim Players
-local SilentAimPlayersToggle = Tabs.SilentAim:Toggle({
+-- Section
+local Section4 = Tab4:Section("⚓・Settings")
+
+-- Toggle 1
+local Toggle4 = Tab4:Toggle({
     Title = "・SilentAim Players",
     Desc = "Lock onto nearest player",
     Default = Settings["SilentAimPlayers"] or false,
     Callback = function(state)
         SilentAimModule:SetPlayerSilentAim(state)
         Settings["SilentAimPlayers"] = state
+        print("Silent Aim Players:", state)
     end
 })
 
--- Silent Mini Players
-local SilentMiniTogglePlayersToggle = Tabs.SilentAim:Toggle({
-    Title = "・SilentAim Mini Toggle Players",
-    Desc = "Lock onto nearest player",
-    Default = Settings["SilentMiniTogglePlayers"] or false,
-    Callback = function(state)
-        SilentAimModule:SetMiniTogglePlayerSilentAim(state)
-        Settings["SilentMiniTogglePlayers"] = state
-    end
-})
-
--- Silent Aim NPC
-local SilentAimNPCToggle = Tabs.SilentAim:Toggle({
-    Title = "・SilentAim Npcs",
-    Desc = "Lock onto nearest npc",
+-- Toggle 2
+local Toggle5 = Tab4:Toggle({
+    Title = "・SilentAim NPC",
+    Desc = "Lock onto nearest NPC",
     Default = Settings["SilentAimNPC"] or false,
     Callback = function(state)
         SilentAimModule:SetNPCSilentAim(state)
         Settings["SilentAimNPC"] = state
+        print("Silent Aim NPC:", state)
     end
 })
 
--- Silent Mini NPC
-local SilentMiniToggleNPCToggle = Tabs.SilentAim:Toggle({
-    Title = "・SilentAim Mini Toggle NPC",
-    Desc = "Lock onto nearest NPC/Boss",
-    Default = Settings["SilentMiniToggleNPC"] or false,
-    Callback = function(state)
-        SilentAimModule:SetMiniToggleNpcSilentAim(state)
-        Settings["SilentMiniToggleNPC"] = state
-    end
-})
-
--- Silent Prediction
-local SilentAimPredictionToggle = Tabs.SilentAim:Toggle({
+-- Toggle 3
+local Toggle6 = Tab4:Toggle({
     Title = "・SilentAim Prediction",
     Desc = "Prediction on target",
     Default = Settings["SilentAimPediction"] or false,
     Callback = function(state)
         SilentAimModule:SetPrediction(state)
         Settings["SilentAimPediction"] = state
+        print("Silent Aim Prediction:", state)
     end
 })
 
--- Silent Prediction Amount
-local SilentPredictionAmountDropdown = Tabs.SilentAim:Dropdown({
+-- Dropdown 1
+local Dropdown2 = Tab4:Dropdown({
     Title = "・Prediction Future",
-    Desc = "Select max Prediction for Silent Aim (Default 0.1s)",
-    Values = {"0.2", "0.3", "0.4"},
+    Desc = "Select prediction amount",
+    Values = {"0.1", "0.2", "0.3", "0.4"},
     Default = tostring(Settings["SilentAimPredictionFuture"] or 0.1),
     Callback = function(selected)
         local num = tonumber(selected)
         if num then
             SilentAimModule:SetPredictionAmount(num)
             Settings["SilentAimPredictionFuture"] = num
+            print("Silent Prediction Amount:", num)
         end
     end
 })
 
--- Distance Limit
-local DistanceAmountDropdown = Tabs.SilentAim:Dropdown({
+-- Dropdown 2
+local Dropdown3 = Tab4:Dropdown({
     Title = "・Distance Limit",
-    Desc = "Select max distance for aimbot (Default 1000m)",
+    Desc = "Select max distance",
     Values = {"200", "400", "600", "800", "1000"},
     Default = tostring(Settings["SilentAimDistanceLimit"] or 1000),
     Callback = function(selected)
@@ -235,87 +187,19 @@ local DistanceAmountDropdown = Tabs.SilentAim:Dropdown({
         if num then
             SilentAimModule:SetDistanceLimit(num)
             Settings["SilentAimDistanceLimit"] = num
+            print("Distance Limit:", num)
         end
     end
 })
 
--- Update player list
-for _, plr in ipairs(Players:GetPlayers()) do
-    if plr ~= LocalPlayer then
-        table.insert(PlayerList, plr.Name)
-    end
-end
+-- === TAB 5: FEATURES ===
+local Tab5 = Window:Tab({ Title = "✿・Features" })
 
--- Select Player Target
-local PlayerDropdown = Tabs.SilentAim:Dropdown({
-    Title = "・Select Player Target",
-    Desc = "Choose a player to lock onto",
-    Values = PlayerList,
-    Default = Settings["SelectedPlayer"] or "None",
-    Callback = function(selected)
-        if selected == "None" then
-            SilentAimModule:SetSelectedPlayer(nil)
-            Settings["SelectedPlayer"] = nil
-        else
-            SilentAimModule:SetSelectedPlayer(selected)
-            Settings["SelectedPlayer"] = selected
-        end
-    end
-})
+-- Section
+local Section5 = Tab5:Section("⚜・Settings")
 
--- Refresh player list
-local function RefreshPlayerList()
-    local newList = {"None"}
-    for _, plr in ipairs(Players:GetPlayers()) do
-        if plr ~= LocalPlayer then
-            table.insert(newList, plr.Name)
-        end
-    end
-    PlayerDropdown:SetValues(newList)
-end
-
-Players.PlayerAdded:Connect(RefreshPlayerList)
-Players.PlayerRemoving:Connect(RefreshPlayerList)
-
--- Godhuman Z Aimlock
-local ZSkillToggle = Tabs.SilentAim:Toggle({
-    Title = "・GodhumanZ Aimlock",
-    Desc = "I only set Godhuman",
-    Default = Settings["ZSkills"] or false,
-    Callback = function(state)
-        ZSkillModule:SetZSkills(state)
-        Settings["ZSkills"] = state
-    end
-})
-
--- Highlight
-local HighlightToggle = Tabs.SilentAim:Toggle({
-    Title = "・Main Highlight",
-    Desc = "Current Target Highlighted",
-    Default = Settings["Highlight"] or false,
-    Callback = function(state)
-        SilentAimModule:SetHighlight(state)
-        Settings["Highlight"] = state
-    end
-})
-
--- Z|M1 Skills
-local ZskillMOneToggle = Tabs.SilentAim:Toggle({
-    Title = "・Z|M1 Skills(except Godhuman Z)",
-    Desc = "Silent Aim That Work Some Skills",
-    Default = Settings["Zskillmone"] or false,
-    Callback = function(state)
-        SilentAimModule:SetZSkillorM1(state)
-        Settings["Zskillmone"] = state
-    end
-})
-
--- Tab 5: Features
-Tabs.Features = Window:Tab({ Title = "✿・Features" })
-local FeaturesSection = Tabs.Features:Section("⚜・Settings")
-
--- Join Discord Button
-Tabs.Features:Button({
+-- Button
+Tab5:Button({
     Title = "Join Discord",
     Desc = "Get Link Discord server",
     Callback = function()
@@ -330,133 +214,146 @@ Tabs.Features:Button({
     end
 })
 
--- ESP Players
-local ESPPlayersToggle = Tabs.Features:Toggle({
+-- Toggle 1
+local Toggle7 = Tab5:Toggle({
     Title = "・ESP Players",
     Desc = "Toggle Player ESP",
     Default = Settings["ESPPlayers"] or false,
     Callback = function(state)
         ESPModule:SetESP(state)
         Settings["ESPPlayers"] = state
+        print("ESP Players:", state)
     end
 })
 
--- V3 Skill
-local V3SkillToggle = Tabs.Features:Toggle({
+-- Toggle 2
+local Toggle8 = Tab5:Toggle({
     Title = "・V3 Skill",
     Desc = "Auto activate V3 ability",
     Default = Settings["V3Skill"] or false,
     Callback = function(state)
         ESPModule:SetV3(state)
         Settings["V3Skill"] = state
+        print("V3 Skill:", state)
     end
 })
 
--- Bunny Hop
-local BunnyHopToggle = Tabs.Features:Toggle({
+-- Toggle 3
+local Toggle9 = Tab5:Toggle({
     Title = "・Bunny hop",
     Desc = "Toggle Bunnyhop",
     Default = Settings["BunnyHop"] or false,
     Callback = function(state)
         ESPModule:SetBunnyhop(state)
         Settings["BunnyHop"] = state
+        print("Bunny Hop:", state)
     end
 })
 
--- Aura Skill
-local AuraSkillToggle = Tabs.Features:Toggle({
+-- Toggle 4
+local Toggle10 = Tab5:Toggle({
     Title = "・Aura Skill",
     Desc = "Auto activate Buso",
     Default = Settings["AuraSkill"] or false,
     Callback = function(state)
         ESPModule:SetBuso(state)
         Settings["AuraSkill"] = state
+        print("Aura Skill:", state)
     end
 })
 
--- FPS or Pings
-local FpsOrPingsToggle = Tabs.Features:Toggle({
+-- Toggle 5
+local Toggle11 = Tab5:Toggle({
     Title = "・Fps Or Pings",
     Desc = "Display Ping or Fps",
     Default = Settings["FpsOrPings"] or false,
     Callback = function(state)
         StuffsModule:SetPingsOrFps(state)
         Settings["FpsOrPings"] = state
+        print("FPS or Pings:", state)
     end
 })
 
--- Speed Hack
-Tabs.Features:Input({
+-- Input
+Tab5:Input({
     Title = "Speed Hack",
     Desc = "Set Walk Speed Value",
-    Placeholder = "Enter speed value...",
+    Placeholder = "Enter speed...",
     Default = tostring(getgenv().WalkSpeedValue or 16),
     Callback = function(value)
         local num = tonumber(value)
         if num then
             getgenv().WalkSpeedValue = num
-            UiSettingsModule:SetWalkSpeed(num)
+            if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+                LocalPlayer.Character.Humanoid.WalkSpeed = num
+            end
+            print("Speed set to:", num)
         end
     end
 })
 
--- FPS Boost
-local FpsBoostToggle = Tabs.Features:Toggle({
+-- Toggle 6
+local Toggle12 = Tab5:Toggle({
     Title = "・Fps Boost",
     Desc = "Increase Fps",
     Default = Settings["FpsBoost"] or false,
     Callback = function(state)
         StuffsModule:SetFpsBoost(state)
         Settings["FpsBoost"] = state
+        print("FPS Boost:", state)
     end
 })
 
--- INF Energy
-local INFEnergyToggle = Tabs.Features:Toggle({
+-- Toggle 7
+local Toggle13 = Tab5:Toggle({
     Title = "・INF Energy",
     Desc = "Max Energy",
     Default = Settings["INFEnergy"] or false,
     Callback = function(state)
         StuffsModule:SetINFEnergy(state)
         Settings["INFEnergy"] = state
+        print("INF Energy:", state)
     end
 })
 
--- Walk on Water
-local WalkonWaterToggle = Tabs.Features:Toggle({
+-- Toggle 8
+local Toggle14 = Tab5:Toggle({
     Title = "・Walk on Water",
     Desc = "Travel in Water",
     Default = Settings["WalkonWater"] or false,
     Callback = function(state)
         StuffsModule:SetWalkWater(state)
         Settings["WalkonWater"] = state
+        print("Walk on Water:", state)
     end
 })
 
--- Fast Attack
-local FastAttackToggle = Tabs.Features:Toggle({
+-- Toggle 9
+local Toggle15 = Tab5:Toggle({
     Title = "・Fast Attack",
     Desc = "Fast Attack",
     Default = Settings["FastAttack"] or false,
     Callback = function(state)
         StuffsModule:SetFastAttack(state)
         Settings["FastAttack"] = state
+        print("Fast Attack:", state)
     end
 })
 
--- Anti AFK
-local AntiAFKToggle = Tabs.Features:Toggle({
+-- Toggle 10
+local Toggle16 = Tab5:Toggle({
     Title = "・AntiAfk",
-    Desc = "AntiAfk only on before you off",
+    Desc = "Anti AFK",
     Default = Settings["AntiAFK"] or false,
     Callback = function(state)
         ESPModule:SetAntiAfk(state)
         Settings["AntiAFK"] = state
+        print("Anti AFK:", state)
     end
 })
 
--- Jump Power
-Tabs.Features:Input({
+-- Input 2
+Tab5:Input({
     Title = "Jump Power",
     Desc = "Set Jump Power Value",
     Placeholder = "Enter jump power...",
@@ -466,116 +363,114 @@ Tabs.Features:Input({
         if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
             LocalPlayer.Character.Humanoid.JumpPower = tonumber(value) or 50
         end
+        print("Jump Power set to:", value)
     end
 })
 
--- Auto V4
-local V4Toggle = Tabs.Features:Toggle({
+-- Toggle 11
+local Toggle17 = Tab5:Toggle({
     Title = "・Auto V4",
     Desc = "Auto V4 Transform",
     Default = Settings["V4"] or false,
     Callback = function(state)
         UiSettingsModule:SetV4(state)
         Settings["V4"] = state
+        print("Auto V4:", state)
     end
 })
 
--- Fruit Check
-local FruitCheckToggle = Tabs.Features:Toggle({
+-- Toggle 12
+local Toggle18 = Tab5:Toggle({
     Title = "・Spawned Fruit Check",
     Desc = "Check Fruit Spawned",
     Default = Settings["FruitCheck"] or false,
     Callback = function(state)
         UiSettingsModule:SetFruitCheck(state)
         Settings["FruitCheck"] = state
+        print("Fruit Check:", state)
     end
 })
 
--- Bring Fruits
-local TeleportFruitToggle = Tabs.Features:Toggle({
+-- Toggle 13
+local Toggle19 = Tab5:Toggle({
     Title = "・Bring Fruits",
-    Desc = "It take few seconds to bring fruits",
+    Desc = "Bring fruits to you",
     Default = Settings["TeleportFruit"] or false,
     Callback = function(state)
         UiSettingsModule:SetTeleportFruit(state)
         Settings["TeleportFruit"] = state
+        print("Bring Fruits:", state)
     end
 })
 
--- Auto Ken
-local AutoKenToggle = Tabs.Features:Toggle({
+-- Toggle 14
+local Toggle20 = Tab5:Toggle({
     Title = "・Auto Ken",
-    Desc = "AutoKen",
+    Desc = "Auto Ken",
     Default = Settings["AutoKen"] or false,
     Callback = function(state)
         SilentAimModule:SetAutoKen(state)
         Settings["AutoKen"] = state
+        print("Auto Ken:", state)
     end
 })
 
--- Remove Lava
-local LavaToggle = Tabs.Features:Toggle({
+-- Toggle 15
+local Toggle21 = Tab5:Toggle({
     Title = "・Remove Lava",
     Desc = "Remove Lava",
     Default = Settings["Lava"] or false,
     Callback = function(state)
         StuffsModule:SetLava(state)
         Settings["Lava"] = state
+        print("Remove Lava:", state)
     end
 })
 
--- Remove Fog
-local FogToggle = Tabs.Features:Toggle({
+-- Toggle 16
+local Toggle22 = Tab5:Toggle({
     Title = "・Remove Fog",
     Desc = "Remove Fog",
     Default = Settings["Fog"] or false,
     Callback = function(state)
         StuffsModule:SetFog(state)
         Settings["Fog"] = state
+        print("Remove Fog:", state)
     end
 })
 
--- Dodge no cd
-local DodgeToggle = Tabs.Features:Toggle({
+-- Toggle 17
+local Toggle23 = Tab5:Toggle({
     Title = "・Dodge no cd",
-    Desc = "Dodge no cd",
+    Desc = "Dodge no cooldown",
     Default = Settings["Dodge"] or false,
     Callback = function(state)
         ESPModule:SetNoDodgeCD(state)
         Settings["Dodge"] = state
+        print("Dodge no CD:", state)
     end
 })
 
--- Target Info
-local OpponentToggle = Tabs.Features:Toggle({
-    Title = "・Target Info(Name/Health)",
-    Desc = "Info Of Target",
+-- Toggle 18
+local Toggle24 = Tab5:Toggle({
+    Title = "・Target Info",
+    Desc = "Show target name/health",
     Default = Settings["Opponent"] or false,
     Callback = function(state)
         ZSkillModule:SetInfo(state)
         Settings["Opponent"] = state
+        print("Target Info:", state)
     end
 })
 
--- Tab 6: Settings Manager
-Tabs.Settings = Window:Tab({ Title = "⚙・Settings Manager" })
-local SettingsSection = Tabs.Settings:Section("💾・Settings")
+-- === TAB 6: SETTINGS MANAGER ===
+local Tab6 = Window:Tab({ Title = "⚙・Settings Manager" })
 
--- Job ID Input
-Tabs.Settings:Input({
-    Title = "Paste Job Id Here",
-    Desc = "Paste JobId and press Enter",
-    Placeholder = "Enter Job ID...",
-    Default = "",
-    Callback = function(jobid)
-        if jobid and jobid ~= "" then
-            TeleportService:TeleportToPlaceInstance(game.PlaceId, jobid, LocalPlayer)
-        end
-    end
-})
+-- Section
+local Section6 = Tab6:Section("💾・Settings")
 
--- Save Settings
-Tabs.Settings:Button({
+-- Button 1
+Tab6:Button({
     Title = "Save Current Settings",
     Desc = "Save all current settings",
     Callback = function()
@@ -587,8 +482,8 @@ Tabs.Settings:Button({
     end
 })
 
--- Reset Settings
-Tabs.Settings:Button({
+-- Button 2
+Tab6:Button({
     Title = "Reset Settings",
     Desc = "Clear saved settings",
     Callback = function()
@@ -601,8 +496,8 @@ Tabs.Settings:Button({
     end
 })
 
--- Rejoin Server
-Tabs.Settings:Button({
+-- Button 3
+Tab6:Button({
     Title = "Rejoin Server",
     Desc = "Rejoin your server",
     Callback = function()
@@ -610,107 +505,52 @@ Tabs.Settings:Button({
     end
 })
 
--- Global Text Font
-local GlobalTextDropdown = Tabs.Settings:Dropdown({
+-- Dropdown 1
+local Dropdown4 = Tab6:Dropdown({
     Title = "・Global Text Font",
     Desc = "Change font for all text",
-    Values = {
-        "Arcade", "Cartoon", "SciFi", "Fantasy", "Antique",
-        "Garamond", "RobotoMono", "FredokaOne", "LuckiestGuy",
-        "PermanentMarker", "SpecialElite", "Oswald", "Nunito"
-    },
+    Values = {"Garamond", "RobotoMono", "FredokaOne", "Oswald", "Nunito"},
     Default = Settings["GlobalFont"] or "Garamond",
     Callback = function(selected)
         local fontEnum = Enum.Font[selected]
         if fontEnum then
             ESPModule:SetGlobalFont(fontEnum)
             Settings["GlobalFont"] = selected
+            print("Global Font:", selected)
         end
     end
 })
 
--- RTX Graphics Mode
-local RTXModeDropdown = Tabs.Settings:Dropdown({
+-- Dropdown 2
+local Dropdown5 = Tab6:Dropdown({
     Title = "・RTX Graphics Mode",
-    Desc = "Choose between Autumn or Summer lighting",
+    Desc = "Choose lighting mode",
     Values = {"Autumn", "Summer", "Spring", "Winter"},
     Default = Settings["RTXMode"] or "Summer",
     Callback = function(selected)
         ESPModule:SetRTXMode(selected)
         Settings["RTXMode"] = selected
+        print("RTX Mode:", selected)
     end
 })
 
--- Theme Selection
-local ThemesDropdown = Tabs.Settings:Dropdown({
-    Title = "Select Theme",
-    Desc = "Choose a color theme",
-    Values = UiSettingsModule:getThemeNames(),
-    Default = Settings["Themes"] or "Dark",
-    Callback = function(selected)
-        local newColor = UiSettingsModule.themes[selected]
-        if newColor then
-            -- Update WindUI theme
-            if selected == "Dark" then
-                Window:SetTheme("Dark")
-            elseif selected == "Light" then
-                Window:SetTheme("Light")
-            elseif selected == "Darker" then
-                Window:SetTheme("Darker")
+-- Phím tắt
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed then
+        if input.KeyCode == Enum.KeyCode.M then
+            Window:Toggle()
+        elseif input.KeyCode == Enum.KeyCode.G then
+            local newState = not (Settings["SilentAimPlayers"] or false)
+            Settings["SilentAimPlayers"] = newState
+            SilentAimModule:SetPlayerSilentAim(newState)
+            if Toggle4 then
+                Toggle4:SetValue(newState)
             end
-            Settings["Themes"] = selected
+            Window:Notify({
+                Title = "Sapi Hub",
+                Content = "Silent Aim: " .. (newState and "ON" or "OFF")
+            })
         end
-    end
-})
-
--- Background Theme
-local BackgroundThemesDropdown = Tabs.Settings:Dropdown({
-    Title = "Select Background Theme",
-    Desc = "Choose a color background",
-    Values = UiSettingsModule:getBackgroundThemeNames(),
-    Default = Settings["BackgroundThemes"] or "Dark",
-    Callback = function(selected)
-        Settings["BackgroundThemes"] = selected
-    end
-})
-
--- Text Color
-local TextColorDropdown = Tabs.Settings:Dropdown({
-    Title = "Select TextColor",
-    Desc = "Choose a textcolor",
-    Values = UiSettingsModule:getThemeNames(),
-    Default = Settings["TextColor"] or "Dark",
-    Callback = function(selected)
-        Settings["TextColor"] = selected
-    end
-})
-
--- Áp dụng settings đã lưu
-Settings = OthersStuffsModule.LoadSettings() or {}
-
--- Start fruit notifier
-OthersStuffsModule.StartFruitNotifier()
-
--- Phím tắt mở/tắt UI (M)
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if not gameProcessed and input.KeyCode == Enum.KeyCode.M then
-        Window:Toggle()
-    end
-end)
-
--- Phím tắt bật/tắt Silent Aim (G)
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if not gameProcessed and input.KeyCode == Enum.KeyCode.G then
-        local newState = not (Settings["SilentAimPlayers"] or false)
-        Settings["SilentAimPlayers"] = newState
-        SilentAimModule:SetPlayerSilentAim(newState)
-        if SilentAimPlayersToggle then
-            SilentAimPlayersToggle:SetValue(newState)
-        end
-        Window:Notify({
-            Title = "Sapi Hub",
-            Content = "Silent Aim: " .. (newState and "ON" or "OFF")
-        })
     end
 end)
 
@@ -720,4 +560,4 @@ Window:Notify({
     Content = "Loaded Successfully! Press M to toggle UI"
 })
 
-print("Sapi Hub loaded successfully! Press M to toggle UI")
+print("✅ Sapi Hub loaded! Press M to toggle UI")
