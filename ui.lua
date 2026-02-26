@@ -139,10 +139,10 @@ function CircleClick(Button, X, Y)
 	end)
 end
 
-local DraknessLib = {}
-function DraknessLib:MakeNotify(NotifyConfig)
+local FlurioreLib = {}
+function FlurioreLib:MakeNotify(NotifyConfig)
 	local NotifyConfig = NotifyConfig or {}
-	NotifyConfig.Title = NotifyConfig.Title or "Drakness Hub"
+	NotifyConfig.Title = NotifyConfig.Title or "Hirimi Hub"
 	NotifyConfig.Description = NotifyConfig.Description or "Notification"
 	NotifyConfig.Content = NotifyConfig.Content or "Content"
 	NotifyConfig.Color = NotifyConfig.Color or Color3.fromRGB(255, 0, 255)
@@ -325,7 +325,7 @@ function DraknessLib:MakeNotify(NotifyConfig)
 		TextLabel2.Parent = NotifyFrameReal
 		TextLabel2.Size = UDim2.new(1, -20, 0, 13)
 
-		TextLabel2.Size = UDim2.new(1, -20, 0, 13 + (13 * (TextLabel2.TextBounds.X / TextLabel2.AbsoluteSize.X)))
+		TextLabel2.Size = UDim2.new(1, -20, 0, 13 + (13 * (TextLabel2.TextBounds.X // TextLabel2.AbsoluteSize.X)))
 		TextLabel2.TextWrapped = true
 
 		if TextLabel2.AbsoluteSize.Y < 27 then
@@ -360,10 +360,10 @@ function DraknessLib:MakeNotify(NotifyConfig)
 	end)
 	return NotifyFunction
 end
-function DraknessLib:MakeGui(GuiConfig)
+function FlurioreLib:MakeGui(GuiConfig)
 	local GuiConfig = GuiConfig or {}
-	GuiConfig.NameHub = GuiConfig.NameHub or "Drakness Hub"
-	GuiConfig.Description = GuiConfig.Description or "by: Drakness Team"
+	GuiConfig.NameHub = GuiConfig.NameHub or "Hirimi Hub"
+	GuiConfig.Description = GuiConfig.Description or "Comeback | developing by Hirimi, Teru"
 	GuiConfig.Color = GuiConfig.Color or Color3.fromRGB(255, 0, 255)
 	GuiConfig["Logo Player"] = GuiConfig["Logo Player"] or "https://www.roblox.com/headshot-thumbnail/image?userId="..game:GetService("Players").LocalPlayer.UserId .."&width=420&height=420&format=png"
 	GuiConfig["Name Player"] = GuiConfig["Name Player"] or tostring(game:GetService("Players").LocalPlayer.Name)
@@ -2050,10 +2050,11 @@ function DraknessLib:MakeGui(GuiConfig)
 						end
 					end
 				end
+
 				function DropdownFunc:Set(Value)
-					DropdownFunc.Value = Value or DropdownFunc.Value
+					DropdownFunc.Value = type(Value) == "table" and Value or {}
 					for _, Drop in ScrollSelect:GetChildren() do
-						if Drop.Name ~= "UIListLayout" and not ((typeof(DropdownFunc.Value) == "table" and table.find(DropdownFunc.Value, Drop.OptionText.Text)) or (typeof(DropdownFunc.Value) == "string" and string.find(Drop.OptionText.Text, DropdownFunc.Value))) then
+						if Drop.Name ~= "UIListLayout" and not table.find(DropdownFunc.Value, Drop.OptionText.Text) then
 							TweenService:Create(
 								Drop.ChooseFrame,
 								TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
@@ -2069,7 +2070,7 @@ function DraknessLib:MakeGui(GuiConfig)
 								TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
 								{BackgroundTransparency = 0.999}
 							):Play()
-						elseif Drop.Name ~= "UIListLayout" and ((typeof(DropdownFunc.Value) == "table" and table.find(DropdownFunc.Value, Drop.OptionText.Text)) or (typeof(DropdownFunc.Value) == "string" and string.find(Drop.OptionText.Text, DropdownFunc.Value))) then
+						elseif Drop.Name ~= "UIListLayout" and table.find(DropdownFunc.Value, Drop.OptionText.Text) then
 							TweenService:Create(
 								Drop.ChooseFrame.UIStroke,
 								TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
@@ -2087,18 +2088,13 @@ function DraknessLib:MakeGui(GuiConfig)
 							):Play()
 						end
 					end
-					if DropdownConfig.Multi and typeof(DropdownFunc.Value) == "table" then
-						local DropdownValueTable = table.concat(DropdownFunc.Value, ", ")
-						if DropdownValueTable == "" then
-							OptionSelecting.Text = "Select Options"
-						else
-							OptionSelecting.Text = tostring(DropdownValueTable)
-						end
-						DropdownConfig.Callback(DropdownFunc.Value)
-					else
-						DropdownConfig.Callback(DropdownFunc.Value)
+					local DropdownValueTable = table.concat(DropdownFunc.Value, ", ")
+					OptionSelecting.Text = DropdownValueTable == "" and "Select Options" or DropdownValueTable
+					if DropdownConfig.Callback and typeof(DropdownConfig.Callback) == "function" then
+						DropdownConfig.Callback(table.unpack(DropdownFunc.Value))
 					end
 				end
+
 				function DropdownFunc:AddOption(OptionName)
 					OptionName = OptionName or "Option"
 					local Option = Instance.new("Frame");
@@ -2168,9 +2164,8 @@ function DraknessLib:MakeGui(GuiConfig)
 					OptionButton.Activated:Connect(function()
 						CircleClick(OptionButton, Mouse.X, Mouse.Y) 
 						if DropdownConfig.Multi then
-							if Option.BackgroundTransparency > 0.95 then
+							if not table.find(DropdownFunc.Value, OptionName) then
 								table.insert(DropdownFunc.Value, OptionName)
-								DropdownFunc:Set(DropdownFunc.Value)
 							else
 								for i, value in pairs(DropdownFunc.Value) do
 									if value == OptionName then
@@ -2178,13 +2173,13 @@ function DraknessLib:MakeGui(GuiConfig)
 										break
 									end
 								end
-								DropdownFunc:Set(DropdownFunc.Value)
 							end
 						else
-							DropdownFunc.Value = OptionName
-							DropdownFunc:Set(DropdownFunc.Value)
+							DropdownFunc.Value = {OptionName}
 						end
+						DropdownFunc:Set(DropdownFunc.Value)
 					end)
+					
 					local OffsetY = 0
 					for _, child in ScrollSelect:GetChildren() do
 						if child.Name ~= "UIListLayout" then
@@ -2194,6 +2189,7 @@ function DraknessLib:MakeGui(GuiConfig)
 					ScrollSelect.CanvasSize = UDim2.new(0, 0, 0, OffsetY)
 					DropCount = DropCount + 1
 				end
+
 				function DropdownFunc:Refresh(RefreshList, Selecting)
 					RefreshList = RefreshList or {}
 					Selecting = Selecting or {}
@@ -2218,4 +2214,4 @@ function DraknessLib:MakeGui(GuiConfig)
 	end
 	return Tabs
 end
-return DraknessLib
+return FlurioreLib
