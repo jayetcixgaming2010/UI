@@ -1,8 +1,12 @@
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
+if not LocalPlayer then
+	warn("FlurioreLibFix.lua: LocalPlayer not found! This script must run as a LocalScript.")
+	return
+end
 local Mouse = LocalPlayer:GetMouse()
-local CoreGui = LocalPlayer.PlayerGui 
+local CoreGui = game:GetService("CoreGui") 
 local function MakeDraggable(topbarobject, object)
 	local function CustomPos(topbarobject, object)
 		local Dragging = nil
