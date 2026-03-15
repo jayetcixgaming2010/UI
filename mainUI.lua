@@ -290,9 +290,9 @@ function Library:NewWindow(ConfigWindow)
 
 		Main.Image = ""
 
-		Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		Main.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 
-		Main.BackgroundTransparency = 0.35
+		Main.BackgroundTransparency = 0
 
 	end
 
@@ -708,9 +708,9 @@ function Library:NewWindow(ConfigWindow)
 
 	TabFrame.Parent = Main
 
-	TabFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	TabFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
-	TabFrame.BackgroundTransparency = 0.500
+	TabFrame.BackgroundTransparency = 1.000
 
 	TabFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 
@@ -1282,7 +1282,7 @@ function Library:NewWindow(ConfigWindow)
 
 			Section.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
-			Section.BackgroundTransparency = 0.920
+			Section.BackgroundTransparency = 0.980
 
 			Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
 
@@ -3263,7 +3263,7 @@ function Library:NewWindow(ConfigWindow)
 
 	G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 
-	G2L["2"]["Image"] = [[rbxassetid://80900795508277]];
+	G2L["2"]["Image"] = [[rbxassetid://101817370702077]];
 
 	G2L["2"]["Size"] = UDim2.new(0, 50, 0, 50);
 
