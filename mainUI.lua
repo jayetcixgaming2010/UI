@@ -142,13 +142,14 @@ function Library:NewWindow(ConfigWindow)
 	DropShadow.BackgroundTransparency = 1
 	DropShadow.BorderSizePixel = 0
 	DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
-	DropShadow.Size = UDim2.new(1, 60, 1, 60)
+	DropShadow.Size = UDim2.new(1, 80, 1, 80)
 	DropShadow.ZIndex = 0
-	DropShadow.Image = "rbxassetid://6015897843"
+	-- rbxassetid://5028857084 là shadow bo góc chuẩn (rounded corners)
+	DropShadow.Image = "rbxassetid://5028857084"
 	DropShadow.ImageColor3 = Color3.fromRGB(0, 212, 255)
-	DropShadow.ImageTransparency = 0.82
+	DropShadow.ImageTransparency = 0.7
 	DropShadow.ScaleType = Enum.ScaleType.Slice
-	DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+	DropShadow.SliceCenter = Rect.new(23, 23, 276, 276)
 
 	-- Main frame
 	Main.Name = "Main"
@@ -164,10 +165,22 @@ function Library:NewWindow(ConfigWindow)
 	MainCorner.CornerRadius = UDim.new(0, 14)
 	MainCorner.Parent = Main
 
+	-- StrokeWrapper ngoài Main cùng cấp để UIStroke không bị ClipsDescendants cắt bo góc
+	local StrokeWrapper = Instance.new("Frame", DropShadowHolder)
+	StrokeWrapper.Name = "StrokeWrapper"
+	StrokeWrapper.AnchorPoint = Vector2.new(0.5, 0.5)
+	StrokeWrapper.Position = UDim2.new(0.5, 0, 0.5, 0)
+	StrokeWrapper.Size = UDim2.new(0, 570, 0, 360)
+	StrokeWrapper.BackgroundTransparency = 1
+	StrokeWrapper.BorderSizePixel = 0
+	StrokeWrapper.ZIndex = 5
+	local _swCorner = Instance.new("UICorner", StrokeWrapper)
+	_swCorner.CornerRadius = UDim.new(0, 14)
+
 	MainStroke.Color = ACCENT
 	MainStroke.Thickness = 1.4
 	MainStroke.Transparency = 0.35
-	MainStroke.Parent = Main
+	MainStroke.Parent = StrokeWrapper
 
 	-- Topbar
 	Top.Name = "Top"
@@ -176,6 +189,10 @@ function Library:NewWindow(ConfigWindow)
 	Top.BackgroundTransparency = 0.35
 	Top.BorderSizePixel = 0
 	Top.Size = UDim2.new(1, 0, 0, 52)
+
+	-- Bo góc trên cho topbar khớp với Main
+	local TopCorner = Instance.new("UICorner", Top)
+	TopCorner.CornerRadius = UDim.new(0, 14)
 
 	TopLine.Name = "TopLine"
 	TopLine.Parent = Top
@@ -327,6 +344,10 @@ function Library:NewWindow(ConfigWindow)
 	TabFrame.BorderSizePixel = 0
 	TabFrame.Position = UDim2.new(0, 0, 0, 52)
 	TabFrame.Size = UDim2.new(0, 148, 1, -52)
+
+	-- Bo góc dưới-trái cho sidebar
+	local TabFrameCorner = Instance.new("UICorner", TabFrame)
+	TabFrameCorner.CornerRadius = UDim.new(0, 14)
 
 	TabLine.Name = "TabLine"
 	TabLine.Parent = TabFrame
