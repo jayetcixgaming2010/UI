@@ -1,10 +1,5 @@
 local Library = {}
 
--- ══════════════════════════════════════
---  THEME – #00D4FF  (Sky Cyan)
---  ACCENT  = 0, 212, 255
---  BG_MAIN = 15, 15, 20   (tối như ảnh)
--- ══════════════════════════════════════
 local ACCENT     = Color3.fromRGB(0,   212, 255)
 local ACCENT2    = Color3.fromRGB(0,   160, 200)
 local BG_MAIN    = Color3.fromRGB(15,   15,  20)
