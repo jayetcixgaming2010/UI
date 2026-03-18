@@ -1,5 +1,10 @@
 local Library = {}
 
+-- ══════════════════════════════════════
+--  THEME – #00D4FF  (Sky Cyan)
+--  ACCENT  = 0, 212, 255
+--  BG_MAIN = 15, 15, 20   (tối như ảnh)
+-- ══════════════════════════════════════
 local ACCENT     = Color3.fromRGB(0,   212, 255)
 local ACCENT2    = Color3.fromRGB(0,   160, 200)
 local BG_MAIN    = Color3.fromRGB(15,   15,  20)
@@ -152,22 +157,23 @@ function Library:NewWindow(ConfigWindow)
 	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Main.Size = UDim2.new(0, 570, 0, 360)
 	Main.BackgroundColor3 = BG_MAIN
+	Main.BackgroundTransparency = 0.18
 	Main.BorderSizePixel = 0
 	Main.ClipsDescendants = true
 
-	MainCorner.CornerRadius = UDim.new(0, 8)
+	MainCorner.CornerRadius = UDim.new(0, 14)
 	MainCorner.Parent = Main
 
 	MainStroke.Color = ACCENT
-	MainStroke.Thickness = 1.2
-	MainStroke.Transparency = 0.5
+	MainStroke.Thickness = 1.4
+	MainStroke.Transparency = 0.35
 	MainStroke.Parent = Main
 
 	-- Topbar
 	Top.Name = "Top"
 	Top.Parent = Main
 	Top.BackgroundColor3 = BG_PANEL
-	Top.BackgroundTransparency = 0
+	Top.BackgroundTransparency = 0.35
 	Top.BorderSizePixel = 0
 	Top.Size = UDim2.new(1, 0, 0, 52)
 
@@ -317,7 +323,7 @@ function Library:NewWindow(ConfigWindow)
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = Main
 	TabFrame.BackgroundColor3 = BG_PANEL
-	TabFrame.BackgroundTransparency = 0
+	TabFrame.BackgroundTransparency = 0.45
 	TabFrame.BorderSizePixel = 0
 	TabFrame.Position = UDim2.new(0, 0, 0, 52)
 	TabFrame.Size = UDim2.new(0, 148, 1, -52)
@@ -334,15 +340,15 @@ function Library:NewWindow(ConfigWindow)
 	SearchFrame.Name = "SearchFrame"
 	SearchFrame.Parent = TabFrame
 	SearchFrame.BackgroundColor3 = BG_ITEM
-	SearchFrame.BackgroundTransparency = 0
+	SearchFrame.BackgroundTransparency = 0.45
 	SearchFrame.BorderSizePixel = 0
 	SearchFrame.Position = UDim2.new(0, 8, 0, 10)
 	SearchFrame.Size = UDim2.new(1, -16, 0, 28)
-	SearchCorner.CornerRadius = UDim.new(0, 5)
+	SearchCorner.CornerRadius = UDim.new(0, 7)
 	SearchCorner.Parent = SearchFrame
 	SearchStroke.Color = ACCENT
 	SearchStroke.Thickness = 0.8
-	SearchStroke.Transparency = 0.7
+	SearchStroke.Transparency = 0.55
 	SearchStroke.Parent = SearchFrame
 
 	IconSearch.Parent = SearchFrame
@@ -626,12 +632,12 @@ function Library:NewWindow(ConfigWindow)
 			local Section = Instance.new("Frame", Layout)
 			Section.Name = "Section"
 			Section.BackgroundColor3 = BG_ITEM
-			Section.BackgroundTransparency = 0.3
+			Section.BackgroundTransparency = 0.5
 			Section.BorderSizePixel = 0
 			Section.Size = UDim2.new(1, 0, 0, 50)
-			local sc = Instance.new("UICorner", Section); sc.CornerRadius = UDim.new(0,6)
+			local sc = Instance.new("UICorner", Section); sc.CornerRadius = UDim.new(0,10)
 			local ss = Instance.new("UIStroke", Section)
-			ss.Color = ACCENT; ss.Thickness = 0.8; ss.Transparency = 0.75
+			ss.Color = ACCENT; ss.Thickness = 0.8; ss.Transparency = 0.65
 
 			-- Section header
 			local SectHead = Instance.new("Frame", Section)
@@ -701,10 +707,10 @@ function Library:NewWindow(ConfigWindow)
 				local Row = Instance.new("Frame", SectionList)
 				Row.Name = "Toggle"
 				Row.BackgroundColor3 = BG_ITEM2
-				Row.BackgroundTransparency = 0.5
+				Row.BackgroundTransparency = 0.65
 				Row.BorderSizePixel = 0
 				Row.Size = UDim2.new(1,0,0,36)
-				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,5)
+				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,8)
 
 				local TitleL = Instance.new("TextLabel", Row)
 				TitleL.Name = "Title"
@@ -773,10 +779,10 @@ function Library:NewWindow(ConfigWindow)
 
 				-- Hover
 				Row.MouseEnter:Connect(function()
-					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.2)
+					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.35)
 				end)
 				Row.MouseLeave:Connect(function()
-					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.5)
+					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.65)
 				end)
 
 				return TogFunc
@@ -791,10 +797,10 @@ function Library:NewWindow(ConfigWindow)
 				local Row = Instance.new("Frame", SectionList)
 				Row.Name = "Button"
 				Row.BackgroundColor3 = BG_ITEM2
-				Row.BackgroundTransparency = 0.5
+				Row.BackgroundTransparency = 0.65
 				Row.BorderSizePixel = 0
 				Row.Size = UDim2.new(1,0,0,36)
-				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,5)
+				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,8)
 
 				local TitleL = Instance.new("TextLabel", Row)
 				TitleL.Name = "Title"
@@ -835,15 +841,15 @@ function Library:NewWindow(ConfigWindow)
 				Clicker.Text = ""
 
 				Clicker.Activated:Connect(function()
-					Library:TweenInstance(Row, 0.1, "BackgroundTransparency", 0.1)
+					Library:TweenInstance(Row, 0.1, "BackgroundTransparency", 0.2)
 					cfg.Callback()
-					Library:TweenInstance(Row, 0.2, "BackgroundTransparency", 0.5)
+					Library:TweenInstance(Row, 0.2, "BackgroundTransparency", 0.65)
 				end)
 				Row.MouseEnter:Connect(function()
-					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.2)
+					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.35)
 				end)
 				Row.MouseLeave:Connect(function()
-					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.5)
+					Library:TweenInstance(Row, 0.15, "BackgroundTransparency", 0.65)
 				end)
 			end
 
@@ -856,10 +862,10 @@ function Library:NewWindow(ConfigWindow)
 				local Row = Instance.new("Frame", SectionList)
 				Row.Name = "Dropdown"
 				Row.BackgroundColor3 = BG_ITEM2
-				Row.BackgroundTransparency = 0.5
+				Row.BackgroundTransparency = 0.65
 				Row.BorderSizePixel = 0
 				Row.Size = UDim2.new(1,0,0,36)
-				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,5)
+				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,8)
 
 				local TitleL = Instance.new("TextLabel", Row)
 				TitleL.Name = "Title"
@@ -1130,10 +1136,10 @@ function Library:NewWindow(ConfigWindow)
 				local Row = Instance.new("Frame", SectionList)
 				Row.Name = "Input"
 				Row.BackgroundColor3 = BG_ITEM2
-				Row.BackgroundTransparency = 0.5
+				Row.BackgroundTransparency = 0.65
 				Row.BorderSizePixel = 0
 				Row.Size = UDim2.new(1,0,0,36)
-				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,5)
+				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,8)
 
 				local TitleL = Instance.new("TextLabel", Row)
 				TitleL.Name = "Title"
@@ -1203,10 +1209,10 @@ function Library:NewWindow(ConfigWindow)
 				local Row = Instance.new("Frame", SectionList)
 				Row.Name = "Slider"
 				Row.BackgroundColor3 = BG_ITEM2
-				Row.BackgroundTransparency = 0.5
+				Row.BackgroundTransparency = 0.65
 				Row.BorderSizePixel = 0
 				Row.Size = UDim2.new(1,0,0,36)
-				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,5)
+				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,8)
 
 				local TitleL = Instance.new("TextLabel", Row)
 				TitleL.Name = "Title"
@@ -1339,10 +1345,10 @@ function Library:NewWindow(ConfigWindow)
 				local Row = Instance.new("Frame", SectionList)
 				Row.Name = "Paragraph"
 				Row.BackgroundColor3 = BG_ITEM2
-				Row.BackgroundTransparency = 0.5
+				Row.BackgroundTransparency = 0.65
 				Row.BorderSizePixel = 0
 				Row.Size = UDim2.new(1,0,0,44)
-				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,5)
+				local rc = Instance.new("UICorner",Row); rc.CornerRadius = UDim.new(0,8)
 
 				local TitleL = Instance.new("TextLabel", Row)
 				TitleL.Name = "Title"
