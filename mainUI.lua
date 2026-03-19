@@ -217,7 +217,7 @@ function Library:NewWindow(ConfigWindow)
 	LogoHub.BorderSizePixel = 0
 	LogoHub.Position = UDim2.new(0, 4, 0, 4)
 	LogoHub.Size = UDim2.new(1, -8, 1, -8)
-	LogoHub.Image = "rbxassetid://80900795508277"
+	LogoHub.Image = "rbxassetid://89906421818860"
 	LogoHub.ScaleType = Enum.ScaleType.Fit
 
 	NameHub.Name = "NameHub"
@@ -279,7 +279,7 @@ function Library:NewWindow(ConfigWindow)
 
 	Minize, MinizeIcon = MakeTopBtn("rbxassetid://136452605242985", 288, 672, BtnFrame)
 	Large,  LargeIcon  = MakeTopBtn("rbxassetid://136452605242985", 580, 194, BtnFrame)
-	Close,  CloseIcon  = MakeTopBtn("rbxassetid://105957381820378", 480,   0, BtnFrame)
+	Close,  CloseIcon  = MakeTopBtn("rbxassetid://89906421818860", 480,   0, BtnFrame)
 	CloseIcon.ImageColor3 = Color3.fromRGB(255, 80, 80)
 
 	Close.MouseButton1Down:Connect(function()
@@ -510,7 +510,7 @@ function Library:NewWindow(ConfigWindow)
 	ToggleBtn.BorderSizePixel = 0
 	ToggleBtn.Position = UDim2.new(0, 20, 0, 20)
 	ToggleBtn.Size = UDim2.new(0, 46, 0, 46)
-	ToggleBtn.Image = "rbxassetid://80900795508277"
+	ToggleBtn.Image = "rbxassetid://89906421818860"
 	local tbc = Instance.new("UICorner", ToggleBtn); tbc.CornerRadius = UDim.new(1,0)
 	local tbs = Instance.new("UIStroke", ToggleBtn); tbs.Color = ACCENT; tbs.Thickness = 1.5; tbs.Transparency = 0.3
 	self:MakeDraggable(ToggleBtn, ToggleBtn)
@@ -1012,7 +1012,7 @@ function Library:NewWindow(ConfigWindow)
 				pcIcon.BackgroundTransparency = 1
 				pcIcon.Position = UDim2.new(0.5,0,0.5,0)
 				pcIcon.Size = UDim2.new(0,14,0,14)
-				pcIcon.Image = "rbxassetid://105957381820378"
+				pcIcon.Image = "rbxassetid://89906421818860"
 				pcIcon.ImageRectOffset = Vector2.new(480,0)
 				pcIcon.ImageRectSize = Vector2.new(96,96)
 				pcIcon.ImageColor3 = TEXT_GRAY
@@ -1412,7 +1412,7 @@ function Library:NewWindow(ConfigWindow)
 				Icon.BackgroundTransparency = 1
 				Icon.Position = UDim2.new(0,10,0,8)
 				Icon.Size = UDim2.new(0,42,0,42)
-				Icon.Image = "rbxassetid://80900795508277"
+				Icon.Image = "rbxassetid://89906421818860"
 
 				local Title = Instance.new("TextLabel", Card)
 				Title.BackgroundTransparency = 1
