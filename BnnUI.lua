@@ -337,7 +337,7 @@ local libCreateNoti = function(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-    TextLabelNoti.Text = "<font color=\"rgb(" .. tostring(color or "255,206,27") .. ")\">" .. tostring("Your Name") .. "</font> " .. tostring(getgenv().TitleNameNoti or "")
+    TextLabelNoti.Text = "<font color=\"rgb(" .. tostring(color or "2,247,247") .. ")\">" .. tostring("Your Name") .. "</font> " .. tostring(getgenv().TitleNameNoti or "")
     
 	TextLabelNoti.Name = "TextLabelNoti"
 	TextLabelNoti.Parent = Topnoti
@@ -579,7 +579,7 @@ function Library:CreateWindow(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-    TextLabelMain.Text = "<font color=\"rgb(" .. tostring(color or "255,206,27") .. ")\">" .. tostring(TitleNameMain or "Your Name Hub") .. "</font> " .. tostring(getgenv().MainDesc or "")
+    TextLabelMain.Text = "<font color=\"rgb(" .. tostring(color or "2,247,247") .. ")\">" .. tostring(TitleNameMain or "Your Name Hub") .. "</font> " .. tostring(getgenv().MainDesc or "")
 
 	PageControl.Name = "Background1"
 	PageControl.Parent = Concacmain
@@ -1363,7 +1363,7 @@ function Library:CreateWindow(Setting)
 				check.Name = "check"
 				check.Parent = checkbox
 				check.AnchorPoint = Vector2.new(0.5, 0.5)
-				check.BackgroundColor3 = Color3.fromRGB(255, 206, 27)
+				check.BackgroundColor3 = getgenv().UIColor["Toggle Checked Color"]  -- Đã đổi từ vàng sang cyan
 				check.Position = UDim2.new(0.5, 0, 0.5, 0)
 				local cac = 5
 				if Desc then
@@ -1525,20 +1525,20 @@ function Library:CreateWindow(Setting)
              ClickArea_1.Name = "ClickArea"
              ClickArea_1.Parent = RowBG_1
              ClickArea_1.AnchorPoint = Vector2.new(1, 0.5)
-             ClickArea_1.BackgroundColor3 = Color3.fromRGB(255, 206, 27)
+             ClickArea_1.BackgroundColor3 = getgenv().UIColor["Button Color"]  -- Đã đổi từ vàng sang cyan
              ClickArea_1.Position = UDim2.new(1, -8,0.5, 0)
              ClickArea_1.Size = UDim2.new(0, 94,0, 30)
-             ClickArea_1.ClipsDescendants = true  -- THÊM DÒNG NÀY: Ngăn ripple tràn ra
+             ClickArea_1.ClipsDescendants = true
              
              UICorner_3.Parent = ClickArea_1
              UICorner_3.CornerRadius = UDim.new(0,12)
              
              UIGradient_1.Parent = ClickArea_1
              UIGradient_1.Color = ColorSequence.new{
-                 ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 216, 77)), 
-                 ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255, 206, 27)), 
-                 ColorSequenceKeypoint.new(0.6, Color3.fromRGB(235, 186, 17)), 
-                 ColorSequenceKeypoint.new(1, Color3.fromRGB(215, 166, 7))
+                 ColorSequenceKeypoint.new(0, Color3.fromRGB(2, 247, 247)),   -- Cyan
+                 ColorSequenceKeypoint.new(0.4, Color3.fromRGB(2, 247, 247)), -- Cyan
+                 ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 200, 200)),  -- Xanh đậm hơn
+                 ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 150, 150))     -- Xanh tối
              }
              UIGradient_1.Rotation = 90
              
@@ -3215,7 +3215,7 @@ function sectionFunction:AddKeyBind(Setting, Callback)
     
     return keybindFunction
 end
-			function sectionFunction:AddInput(idk, Setting)
+			function sectionFunction:AddInput(idk,Setting)
 				local TitleText = tostring(Setting.Text or Setting.Title) or ""
 				local Placeholder = tostring(Setting.Placeholder) or ""
 				local Default = Setting.Default or false
