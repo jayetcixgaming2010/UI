@@ -15,7 +15,7 @@ local T1UIColor = {
 	["Border Color"] = Color3.fromRGB(255, 255, 255),  -- Viền trắng
 	["Click Effect Color"] = Color3.fromRGB(255, 215, 0), -- Vàng
 	["Setting Icon Color"] = Color3.fromRGB(255, 215, 0), -- Vàng
-	["Logo Image"] = "rbxassetid://109812249083204",
+	["Logo Image"] = "rbxassetid://79918815542456",
 	["Search Icon Color"] = Color3.fromRGB(240, 240, 230),
 	["Search Icon Highlight Color"] = Color3.fromRGB(255, 215, 0), -- Vàng
 	["GUI Text Color"] = Color3.fromRGB(235, 235, 230),
@@ -115,11 +115,11 @@ end)
 
 Library_Function.NotiGui = Instance.new('ScreenGui')
 Library_Function.NotiGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Library_Function.NotiGui.Name = 'Your Name Hub Notification'
+Library_Function.NotiGui.Name = 'Nousigi Hub Notification'
 
 Library_Function.HideGui = Instance.new('ScreenGui')
 Library_Function.HideGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Library_Function.HideGui.Name = 'Your Name Hub Btn'
+Library_Function.HideGui.Name = 'Nousigi Hub Btn'
 
 
 local btnHide = Instance.new('TextButton', Library_Function.HideGui) 
@@ -337,7 +337,7 @@ local libCreateNoti = function(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-    TextLabelNoti.Text = "<font color=\"rgb(" .. tostring(color or "255,206,27") .. ")\">" .. tostring("Bear Hub") .. "</font> " .. tostring(getgenv().TitleNameNoti or "")
+    TextLabelNoti.Text = "<font color=\"rgb(" .. tostring(color or "255,206,27") .. ")\">" .. tostring("Your Name") .. "</font> " .. tostring(getgenv().TitleNameNoti or "")
     
 	TextLabelNoti.Name = "TextLabelNoti"
 	TextLabelNoti.Parent = Topnoti
@@ -444,7 +444,7 @@ function Library:Notify(Setting, bypass)
 end
 
 function Library:CreateWindow(Setting)
-    local TitleNameMain = Setting.Title or "Bear Hub"
+    local TitleNameMain = Setting.Title or "Your Name Hub"
     getgenv().MainDesc = Setting.Desc or Setting.Subtitle or ""
     
     if Setting.Image then
@@ -579,7 +579,7 @@ function Library:CreateWindow(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-    TextLabelMain.Text = "<font color=\"rgb(" .. tostring(color or "255,206,27") .. ")\">" .. tostring(TitleNameMain or "Bear Hub") .. "</font> " .. tostring(getgenv().MainDesc or "")
+    TextLabelMain.Text = "<font color=\"rgb(" .. tostring(color or "255,206,27") .. ")\">" .. tostring(TitleNameMain or "Your Name Hub") .. "</font> " .. tostring(getgenv().MainDesc or "")
 
 	PageControl.Name = "Background1"
 	PageControl.Parent = Concacmain
@@ -1267,7 +1267,7 @@ function Library:CreateWindow(Setting)
 				visibility.Position = UDim2.new(0.5, 0, 0.5, 0)
 				visibility.Size = UDim2.new(1, -4, 1, -4)
 				visibility.ZIndex = 2
-				visibility.Image = "rbxassetid://76571437829227"
+				visibility.Image = "rbxassetid://79918815542456"
 				visibility.ImageRectOffset = Vector2.new(84, 44)
 				visibility.ImageRectSize = Vector2.new(36, 36)
 				visibility.ImageTransparency = 1
@@ -1279,7 +1279,7 @@ function Library:CreateWindow(Setting)
 				visibility_off.Position = UDim2.new(0.5, 0, 0.5, 0)
 				visibility_off.Size = UDim2.new(1, -4, 1, -4)
 				visibility_off.ZIndex = 2
-				visibility_off.Image = "rbxassetid://76571437829227"
+				visibility_off.Image = "rbxassetid://79918815542456"
 				visibility_off.ImageRectOffset = Vector2.new(564, 44)
 				visibility_off.ImageRectSize = Vector2.new(36, 36)
 				visibility_off.ImageTransparency = 0
