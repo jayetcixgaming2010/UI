@@ -1,47 +1,46 @@
-if getgenv().Nousigi then 
-	if game.CoreGui:FindFirstChild("Nousigi Hub GUI") then
+if getgenv().YN then 
+	if game.CoreGui:FindFirstChild("YN Hub GUI") then
 		for i, v in ipairs(game.CoreGui:GetChildren()) do
-			if string.find(v.Name,  "Nousigi Hub") then
+			if string.find(v.Name,  "YN Hub") then
 				v:Destroy()
 			end
 		end
 	end
 end
-getgenv().Nousigi = true
+getgenv().YN = true
 
--- Theme: Viền trắng + Màu vàng thay vì cam
 local DisableAnimation = game.Players.LocalPlayer.PlayerGui:FindFirstChild('TouchGui')
 local T1UIColor = {
-	["Border Color"] = Color3.fromRGB(255, 255, 255),  -- Viền trắng
-	["Click Effect Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
-	["Setting Icon Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Border Color"] = Color3.fromRGB(255, 255, 255),  
+	["Click Effect Color"] = Color3.fromRGB(2, 247, 247), 
+	["Setting Icon Color"] = Color3.fromRGB(2, 247, 247), 
 	["Logo Image"] = "rbxassetid://79918815542456",
 	["Search Icon Color"] = Color3.fromRGB(240, 240, 230),
-	["Search Icon Highlight Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Search Icon Highlight Color"] = Color3.fromRGB(2, 247, 247), 
 	["GUI Text Color"] = Color3.fromRGB(235, 235, 230),
 	["Text Color"] = Color3.fromRGB(235, 235, 230),
 	["Placeholder Text Color"] = Color3.fromRGB(170, 170, 160),
-	["Title Text Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Title Text Color"] = Color3.fromRGB(2, 247, 247), 
 	["Background Main Color"] = Color3.fromRGB(18, 18, 22),
 	["Background 1 Color"] = Color3.fromRGB(28, 28, 34),
 	["Background 1 Transparency"] = 0.1,
 	["Background 2 Color"] = Color3.fromRGB(38, 38, 46),
 	["Background 3 Color"] = Color3.fromRGB(48, 48, 56),
 	["Background Image"] = "",
-	["Page Selected Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Page Selected Color"] = Color3.fromRGB(2, 247, 247), 
 	["Section Text Color"] = Color3.fromRGB(220, 220, 210),
-	["Section Underline Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
-	["Toggle Border Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
-	["Toggle Checked Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Section Underline Color"] = Color3.fromRGB(2, 247, 247), 
+	["Toggle Border Color"] = Color3.fromRGB(2, 247, 247), 
+	["Toggle Checked Color"] = Color3.fromRGB(2, 247, 247), 
 	["Toggle Desc Color"] = Color3.fromRGB(185, 185, 185),
-	["Button Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Button Color"] = Color3.fromRGB(2, 247, 247), 
 	["Label Color"] = Color3.fromRGB(38, 38, 42),
-	["Dropdown Icon Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
-	["Dropdown Selected Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Dropdown Icon Color"] = Color3.fromRGB(2, 247, 247), 
+	["Dropdown Selected Color"] = Color3.fromRGB(2, 247, 247), 
 	["Dropdown Selected Check Color"] = Color3.fromRGB(2, 230, 230), 
-	["Textbox Highlight Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
-	["Box Highlight Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
-	["Slider Line Color"] = Color3.fromRGB(2, 247, 247), -- Xanh cyan
+	["Textbox Highlight Color"] = Color3.fromRGB(2, 247, 247), 
+	["Box Highlight Color"] = Color3.fromRGB(2, 247, 247), 
+	["Slider Line Color"] = Color3.fromRGB(2, 247, 247), 
 	["Slider Highlight Color"] = Color3.fromRGB(2, 230, 230), 
 	["Tween Animation 1 Speed"] = DisableAnimation and 0 or 0.25,
 	["Tween Animation 2 Speed"] = DisableAnimation and 0 or 0.5,
@@ -99,7 +98,7 @@ end
 
 Library_Function.Gui = Instance.new('ScreenGui')
 Library_Function.Gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Library_Function.Gui.Name = 'Nousigi Hub GUI'
+Library_Function.Gui.Name = 'YN Hub GUI'
 Library_Function.Gui.Enabled = false
 
 getgenv().ReadyForGuiLoaded = false
@@ -115,11 +114,11 @@ end)
 
 Library_Function.NotiGui = Instance.new('ScreenGui')
 Library_Function.NotiGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Library_Function.NotiGui.Name = 'Nousigi Hub Notification'
+Library_Function.NotiGui.Name = 'YN Hub Notification'
 
 Library_Function.HideGui = Instance.new('ScreenGui')
 Library_Function.HideGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Library_Function.HideGui.Name = 'Nousigi Hub Btn'
+Library_Function.HideGui.Name = 'YN Hub Btn'
 
 
 local btnHide = Instance.new('TextButton', Library_Function.HideGui) 
@@ -158,9 +157,9 @@ Library.ToggleUI = function()
 	TweenService:Create(btnHideFrame, TweenInfo.new(DisableAnimation and 0 or .25), {
 		BackgroundTransparency = getgenv().UIToggled and 0 or .25
 	}):Play()
-	if game.CoreGui:FindFirstChild("Nousigi Hub GUI") then
+	if game.CoreGui:FindFirstChild("YN Hub GUI") then
 		for a, b in ipairs(game.CoreGui:GetChildren()) do
-			if b.Name == "Nousigi Hub GUI" then
+			if b.Name == "YN Hub GUI" then
 				b.Enabled = getgenv().UIToggled
 			end
 		end
@@ -168,9 +167,9 @@ Library.ToggleUI = function()
 end
 
 Library.DestroyUI = function()
-	if game.CoreGui:FindFirstChild("Nousigi Hub GUI") then
+	if game.CoreGui:FindFirstChild("YN Hub GUI") then
 		for i, v in ipairs(game.CoreGui:GetChildren()) do
-			if string.find(v.Name,  "Nousigi Hub") then
+			if string.find(v.Name,  "YN Hub") then
 				v:Destroy()
 			end
 		end
@@ -178,15 +177,14 @@ Library.DestroyUI = function()
 end
 
 if true then
-	local button = btnHide -- Assuming this is a TextButton or ImageButton
+	local button = btnHide 
 	local UIS = game:GetService("UserInputService")
 	
 	local dragging = false
 	local dragInput, dragStart, startPos
-	local holdTime = 0.1 -- Time to hold before dragging is enabled
+	local holdTime = 0.1 
 	local holdStarted = 0
 	
-	-- Function to update the button's position
 	local function update(input)
 		local delta = input.Position - dragStart
 		button.Position = UDim2.new(
@@ -195,44 +193,38 @@ if true then
 		)
 	end
 	
-	-- Function to detect the start of dragging (for both mouse and touch)
 	local function onInputBegan(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			holdStarted = tick() -- Record the time when holding starts
+			holdStarted = tick() 
 			dragStart = input.Position
 			startPos = button.Position
 	
-			-- Listen for release to stop dragging
 			input.Changed:Connect(function()
 				if input.UserInputState == Enum.UserInputState.End then
 					dragging = false
-					holdStarted = 0 -- Reset the hold timer
+					holdStarted = 0 
 				end
 			end)
 		end
 	end
 	
-	-- Function to detect when dragging stops
 	local function onInputEnded(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
-			holdStarted = 0 -- Reset the hold timer
+			holdStarted = 0 
 		end
 	end
 	
-	-- Detect input movement (for both mouse and touch)
 	local function onInputChanged(input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 			dragInput = input
 		end
 	end
 	
-	-- Connect the events
 	button.InputBegan:Connect(onInputBegan)
 	button.InputEnded:Connect(onInputEnded)
 	button.InputChanged:Connect(onInputChanged)
 	
-	-- RenderStepped updates the position while dragging
 	RunService.RenderStepped:Connect(function()
 		if holdStarted > 0 and (tick() - holdStarted >= holdTime) and not dragging then
 			dragging = true
@@ -719,22 +711,18 @@ function Library:CreateWindow(Setting)
 	Shadow.ScaleType = Enum.ScaleType.Slice
 	Shadow.SliceCenter = Rect.new(24, 24, 276, 276)
 
-    -- Thêm biến để lưu thông tin section
     local sectionInfo = {}
     
-    -- Tạo hàm GlobalSearch nếu chưa tồn tại
     if not GlobalSearch then
         GlobalSearch = function(searchText)
             searchText = string.lower(searchText)
             
             if searchText == "" then
-                -- Hiển thị tất cả như cũ
                 for _, control in pairs(getgenv().AllControls) do
                     control.TabButton.Visible = true
                     control.Section.Visible = true
                     control.Element.Visible = true
                 end
-                -- Hiển thị tất cả tab
                 for _, tab in pairs(ControlList:GetChildren()) do
                     if not tab:IsA('UIListLayout') then
                         tab.Visible = true
@@ -743,34 +731,27 @@ function Library:CreateWindow(Setting)
                 return
             end
             
-            -- Ẩn tất cả trước
             for _, control in pairs(getgenv().AllControls) do
                 control.Section.Visible = false
                 control.Element.Visible = false
             end
             
-            -- Ẩn tất cả tab
             for _, tab in pairs(ControlList:GetChildren()) do
                 if not tab:IsA('UIListLayout') then
                     tab.Visible = false
                 end
             end
             
-            -- Tạo bản đồ section
             local sectionsWithElements = {}
             local elementsInSection = {}
             
-            -- Phân tích từng control
             for _, control in pairs(getgenv().AllControls) do
                 local elementName = string.lower(control.Name or "")
                 local sectionName = string.lower(control.SectionName or "")
                 
-                -- Kiểm tra phần tử (sử dụng string.find thay vì string.match)
                 local elementFound = string.find(elementName, searchText, 1, true) ~= nil
-                -- Kiểm tra section
                 local sectionFound = string.find(sectionName, searchText, 1, true) ~= nil
                 
-                -- Tạo bản đồ section
                 if not elementsInSection[control.Section] then
                     elementsInSection[control.Section] = {}
                 end
@@ -780,20 +761,17 @@ function Library:CreateWindow(Setting)
                     sectionFound = sectionFound
                 })
                 
-                -- Đánh dấu section có phần tử khớp
                 if elementFound then
                     sectionsWithElements[control.Section] = true
                 end
             end
             
-            -- Xử lý hiển thị
             local foundTabs = {}
             
             for section, elements in pairs(elementsInSection) do
                 local shouldShowSection = false
                 local hasElementMatch = false
                 
-                -- Kiểm tra section có khớp không
                 for _, elementInfo in ipairs(elements) do
                     if elementInfo.sectionFound then
                         shouldShowSection = true
@@ -803,15 +781,12 @@ function Library:CreateWindow(Setting)
                     end
                 end
                 
-                -- Logic hiển thị
                 for _, elementInfo in ipairs(elements) do
                     local control = elementInfo.control
                     
                     if elementInfo.elementFound then
-                        -- Phần tử khớp: hiển thị phần tử
                         control.Element.Visible = true
                         
-                        -- Nếu section cũng khớp hoặc có phần tử khớp: hiện section
                         if elementInfo.sectionFound or hasElementMatch then
                             control.Section.Visible = true
                         end
@@ -819,7 +794,6 @@ function Library:CreateWindow(Setting)
                         foundTabs[control.TabName] = true
                         control.TabButton.Visible = true
                     elseif elementInfo.sectionFound and not hasElementMatch then
-                        -- Section khớp nhưng không có phần tử khớp: chỉ hiện section
                         control.Section.Visible = true
                         control.Element.Visible = false
                         
@@ -829,7 +803,6 @@ function Library:CreateWindow(Setting)
                 end
             end
             
-            -- Hiển thị các tab có kết quả
             for tabName, _ in pairs(foundTabs) do
                 for _, tab in pairs(ControlList:GetChildren()) do
                     if not tab:IsA('UIListLayout') and string.find(tab.Name, tabName, 1, true) then
@@ -838,14 +811,11 @@ function Library:CreateWindow(Setting)
                 end
             end
             
-            -- Nếu không tìm thấy gì cả, hiển thị thông báo
             if not next(foundTabs) then
-                -- Có thể thêm thông báo "Không tìm thấy kết quả" ở đây nếu muốn
             end
         end
     end
     
-    -- Kết nối sự kiện search (giữ nguyên)
     SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
         GlobalSearch(SearchBox.Text)
     end)
@@ -864,7 +834,6 @@ function Library:CreateWindow(Setting)
 		LayoutOrder = LayoutOrder + 1
 		LayoutOrderBut = LayoutOrderBut + 1
 
-		--Control 
 		local PageName = Instance.new("Frame")
 		local Frame = Instance.new("Frame")
 		local TabNameCorner = Instance.new("UICorner")
@@ -941,8 +910,6 @@ function Library:CreateWindow(Setting)
 		PageButton.Text = ""
 		PageButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 		PageButton.TextSize = 14.000
-
-		-- Container
 
 		local PageContainer = Instance.new("Frame")
 		local UICorner = Instance.new("UICorner")
@@ -1363,7 +1330,7 @@ function Library:CreateWindow(Setting)
 				check.Name = "check"
 				check.Parent = checkbox
 				check.AnchorPoint = Vector2.new(0.5, 0.5)
-				check.BackgroundColor3 = getgenv().UIColor["Toggle Checked Color"]  -- Đã đổi từ vàng sang cyan
+				check.BackgroundColor3 = getgenv().UIColor["Toggle Checked Color"]  
 				check.Position = UDim2.new(0.5, 0, 0.5, 0)
 				local cac = 5
 				if Desc then
@@ -1525,7 +1492,7 @@ function Library:CreateWindow(Setting)
              ClickArea_1.Name = "ClickArea"
              ClickArea_1.Parent = RowBG_1
              ClickArea_1.AnchorPoint = Vector2.new(1, 0.5)
-             ClickArea_1.BackgroundColor3 = getgenv().UIColor["Button Color"]  -- Đã đổi từ vàng sang cyan
+             ClickArea_1.BackgroundColor3 = getgenv().UIColor["Button Color"]  
              ClickArea_1.Position = UDim2.new(1, -8,0.5, 0)
              ClickArea_1.Size = UDim2.new(0, 94,0, 30)
              ClickArea_1.ClipsDescendants = true
@@ -1535,10 +1502,10 @@ function Library:CreateWindow(Setting)
              
              UIGradient_1.Parent = ClickArea_1
              UIGradient_1.Color = ColorSequence.new{
-                 ColorSequenceKeypoint.new(0, Color3.fromRGB(2, 247, 247)),   -- Cyan
-                 ColorSequenceKeypoint.new(0.4, Color3.fromRGB(2, 247, 247)), -- Cyan
-                 ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 200, 200)),  -- Xanh đậm hơn
-                 ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 150, 150))     -- Xanh tối
+                 ColorSequenceKeypoint.new(0, Color3.fromRGB(2, 247, 247)),   
+                 ColorSequenceKeypoint.new(0.4, Color3.fromRGB(2, 247, 247)), 
+                 ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0, 200, 200)),  
+                 ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 150, 150))     
              }
              UIGradient_1.Rotation = 90
              
@@ -1579,10 +1546,8 @@ function Library:CreateWindow(Setting)
              Button_1.TextColor3 = Color3.fromRGB(240, 240, 240)
              Button_1.TextSize = 13
 
-             -- UIScale mặc định
              UIScale_1.Scale = 1
              
-             -- HOVER (chỉ phóng to)
              local scaleHover = TweenService:Create(UIScale_1, TweenInfo.new(0.12, Enum.EasingStyle.Sine), { Scale = 1.05 })
              local scaleNormal = TweenService:Create(UIScale_1, TweenInfo.new(0.12, Enum.EasingStyle.Sine), { Scale = 1 })
              
@@ -1596,11 +1561,9 @@ function Library:CreateWindow(Setting)
              
                 Button_1.MouseButton1Down:Connect(function()
                     
-                    -- Lấy kích thước thực tế của ClickArea
                     local w = ClickArea_1.AbsoluteSize.X
                     local h = ClickArea_1.AbsoluteSize.Y
                     
-                    -- Tạo ripple với hình dạng bo góc giống button (chữ nhật bo góc)
                     local ripple = Instance.new("Frame")
                     ripple.AnchorPoint = Vector2.new(0.5, 0.5)
                     ripple.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -1610,12 +1573,10 @@ function Library:CreateWindow(Setting)
                     ripple.ZIndex = 20
                     ripple.Parent = ClickArea_1
                     
-                    -- Tạo UICorner cho ripple với bo góc y hệt button
                     local rippleCorner = Instance.new("UICorner")
-                    rippleCorner.CornerRadius = UICorner_3.CornerRadius -- Lấy góc bo từ button
+                    rippleCorner.CornerRadius = UICorner_3.CornerRadius 
                     rippleCorner.Parent = ripple
                     
-                    -- Animation ripple mở rộng từ tâm ra đầy đủ button
                     local rippleTween = TweenService:Create(
                         ripple,
                         TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -1693,6 +1654,9 @@ function Library:CreateWindow(Setting)
                 TextColor.TextXAlignment = Enum.TextXAlignment.Left
 				local labelFunction = {}
 				function labelFunction:SetText(text)
+					TextColor.Text = text
+				end
+				function labelFunction:SetDesc(text)
 					TextColor.Text = text
 				end
 				function labelFunction.SetColor(color)
@@ -1832,7 +1796,6 @@ function Library:CreateWindow(Setting)
                 ScrollContainerList.SortOrder = Enum.SortOrder.LayoutOrder
                 ScrollContainerList.Padding = UDim.new(0, 5)
                 
-                -- Tạo internal section để chứa các control
                 local InternalSection = Instance.new("Frame")
                 InternalSection.Name = "InternalSection"
                 InternalSection.Parent = ScrollContainer
@@ -1886,10 +1849,8 @@ function Library:CreateWindow(Setting)
                     end
                 end)
                 
-                -- Tạo dropdown section functions (CHỈ CÓ SLIDER)
                 local dropdownSectionFunction = {}
                 
-                -- HÀM TẠO SLIDER (RỘNG HƠN, SÁT VIỀN)
                 function dropdownSectionFunction:AddSlider(Setting)
                     local TitleText = tostring(Setting.Text or Setting.Title) or ""
                     local minValue = tonumber(Setting.Min) or 0
@@ -1917,7 +1878,7 @@ function Library:CreateWindow(Setting)
                     SliderFrame.Parent = InternalSection
                     SliderFrame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
                     SliderFrame.BackgroundTransparency = 1.000
-                    SliderFrame.Size = UDim2.new(1, 0, 0, 50)  -- Chiếm toàn bộ chiều rộng
+                    SliderFrame.Size = UDim2.new(1, 0, 0, 50)  
                     
                     SliderCorner.CornerRadius = UDim.new(0, 4)
                     SliderCorner.Name = "SliderCorner"
@@ -1927,7 +1888,7 @@ function Library:CreateWindow(Setting)
                     SliderBG.Parent = SliderFrame
                     SliderBG.AnchorPoint = Vector2.new(0.5, 0.5)
                     SliderBG.Position = UDim2.new(0.5, 0, 0.5, 0)
-                    SliderBG.Size = UDim2.new(1, -5, 1, 0)  -- Chiếm gần toàn bộ (trừ 5 pixel)
+                    SliderBG.Size = UDim2.new(1, -5, 1, 0)  
                     SliderBG.BackgroundColor3 = Color3.fromRGB(28, 28, 34)
                     SliderBG.BackgroundTransparency = 0.25
                     
@@ -1940,7 +1901,7 @@ function Library:CreateWindow(Setting)
                     SliderTitle.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
                     SliderTitle.BackgroundTransparency = 1.000
                     SliderTitle.Position = UDim2.new(0, 10, 0, 0)
-                    SliderTitle.Size = UDim2.new(0.65, -10, 0, 25)  -- Title chiếm 65%
+                    SliderTitle.Size = UDim2.new(0.65, -10, 0, 25)  
                     SliderTitle.Font = Enum.Font.GothamBlack
                     SliderTitle.Text = TitleText
                     SliderTitle.TextSize = 14.000
@@ -1952,7 +1913,7 @@ function Library:CreateWindow(Setting)
                     SliderBar.Parent = SliderFrame
                     SliderBar.AnchorPoint = Vector2.new(0.5, 0.5)
                     SliderBar.Position = UDim2.new(0.5, 0, 0.5, 14)
-                    SliderBar.Size = UDim2.new(0.9, 0, 0, 6)  -- Thanh slider rộng 90%
+                    SliderBar.Size = UDim2.new(0.9, 0, 0, 6)  
                     SliderBar.BackgroundColor3 = getgenv().UIColor["Background 2 Color"]
                     
                     SliderButton.Name = "SliderButton"
@@ -1983,7 +1944,7 @@ function Library:CreateWindow(Setting)
                     Sliderboxframe.Parent = SliderFrame
                     Sliderboxframe.AnchorPoint = Vector2.new(1, 0)
                     Sliderboxframe.Position = UDim2.new(1, -10, 0, 5)
-                    Sliderboxframe.Size = UDim2.new(0.25, 0, 0, 25)  -- Textbox chiếm 25%
+                    Sliderboxframe.Size = UDim2.new(0.25, 0, 0, 25)  
                     Sliderboxframe.BackgroundColor3 = getgenv().UIColor["Background 2 Color"]
                     
                     Sliderbox.CornerRadius = UDim.new(0, 4)
@@ -2331,13 +2292,12 @@ function Library:CreateWindow(Setting)
 					end
 				end
 				local ListNew
-                local OrderedList = {} -- Thêm biến lưu thứ tự
+                local OrderedList = {} 
                 if Selected then
                     ListNew = {}
                     for _, value in ipairs(List) do
-                        -- Kiểm tra nếu value trùng với Default thì set true
                         ListNew[value] = (value == Default)
-                        table.insert(OrderedList, value) -- Lưu thứ tự
+                        table.insert(OrderedList, value) 
                     end
                 else
                     ListNew = List
@@ -2613,42 +2573,36 @@ function Library:CreateWindow(Setting)
 								local holdTime = 0
 								local holdStarted = 0
 
-										-- Function to detect the start of dragging (for both mouse and touch)
 								local function onInputBegan(input)
 									if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-										holdStarted = tick() -- Record the time when holding starts
+										holdStarted = tick() 
 										
-												-- Listen for release to stop dragging
 										input.Changed:Connect(function()
 											if input.UserInputState == Enum.UserInputState.End then
 												dragging = false
-												holdStarted = 0 -- Reset the hold timer
+												holdStarted = 0 
 											end
 										end)
 									end
 								end
 										
-										-- Function to detect when dragging stops
 								local function onInputEnded(input)
 									if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 										dragging = false
-										holdStarted = 0 -- Reset the hold timer
+										holdStarted = 0 
 									end
 								end
 
-										-- Detect input movement (for both mouse and touch)
 								local function onInputChanged(input)
 									if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 										dragInput = input
 									end
 								end
 										
-										-- Connect the events
 								SliderButton.InputBegan:Connect(onInputBegan)
 								SliderButton.InputEnded:Connect(onInputEnded)
 								SliderButton.InputChanged:Connect(onInputChanged)
 										
-										-- RenderStepped updates the position while dragging
 								RunService.RenderStepped:Connect(function()
 									if holdStarted > 0 and (tick() - holdStarted >= holdTime) and not dragging then
 										dragging = true
@@ -2664,45 +2618,39 @@ function Library:CreateWindow(Setting)
 							else
 								local dragging = false
 								local dragInput
-								local holdTime = 0 -- Time to hold before dragging is enabled
+								local holdTime = 0 
 								local holdStarted = 0
 
-										-- Function to detect the start of dragging (for both mouse and touch)
 								local function onInputBegan(input)
 									if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-										holdStarted = tick() -- Record the time when holding starts
+										holdStarted = tick() 
 										
-												-- Listen for release to stop dragging
 										input.Changed:Connect(function()
 											if input.UserInputState == Enum.UserInputState.End then
 												dragging = false
-												holdStarted = 0 -- Reset the hold timer
+												holdStarted = 0 
 											end
 										end)
 									end
 								end
 										
-										-- Function to detect when dragging stops
 								local function onInputEnded(input)
 									if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 										dragging = false
-										holdStarted = 0 -- Reset the hold timer
+										holdStarted = 0 
 									end
 								end
 
-										-- Detect input movement (for both mouse and touch)
 								local function onInputChanged(input)
 									if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 										dragInput = input
 									end
 								end
 										
-										-- Connect the events
 								SliderButton.InputBegan:Connect(onInputBegan)
 								SliderButton.InputEnded:Connect(onInputEnded)
 								SliderButton.InputChanged:Connect(onInputChanged)
 										
-										-- RenderStepped updates the position while dragging
 								RunService.RenderStepped:Connect(function()
 									if holdStarted > 0 and (tick() - holdStarted >= holdTime) and not dragging then
 										dragging = true
@@ -2925,7 +2873,6 @@ function Library:CreateWindow(Setting)
 				end
 				function dropdownFunction:GetNewList(List)
 					Sel.Value = ""
-							--refreshlist()
 					isbusy = false
 					local listsize = isbusy and UDim2.new(1, 0, 0, 170) or UDim2.new(1, 0, 0, 0)
 					local mainsize = isbusy and UDim2.new(1, 0, 0, 200) or UDim2.new(1, 0, 0, 25)
@@ -2948,10 +2895,8 @@ function Library:CreateWindow(Setting)
 						Dropdowntitle.Text = Title .. ': '
 					end
 				end
-				-- THÊM ĐOẠN NÀY
                 function dropdownFunction:SetValue(value)
                     if not Selected then
-                        -- Dropdown đơn lẻ (single)
                         if table.find(ListNew, value) then
                             Sel.Value = value
                             if Search then
@@ -2965,7 +2910,6 @@ function Library:CreateWindow(Setting)
                             refreshlist()
                         end
                     else
-                        -- Dropdown multi-select
                         if ListNew[value] ~= nil then
                             ListNew[value] = true
                             if Search then
@@ -3001,8 +2945,8 @@ function Library:CreateWindow(Setting)
                     SectionName = Section_Name,
                     TabName = Page_Name,
                     TabButton = PageName,
-                    SetValue = dropdownFunction.SetValue,  -- THÊM DÒNG NÀY
-                    GetValue = dropdownFunction.GetValue   -- THÊM DÒNG NÀY
+                    SetValue = dropdownFunction.SetValue,  
+                    GetValue = dropdownFunction.GetValue   
                 }
                 table.insert(getgenv().AllControls, controlData)
                 
@@ -3012,7 +2956,7 @@ function Library:CreateWindow(Setting)
 function sectionFunction:AddKeyBind(Setting, Callback)
     local TitleText = tostring(Setting.Title or Setting.Text) or ""
     local Default = Setting.Default or Setting.Key or "F"
-    local Mode = Setting.Mode or "Toggle" -- Hold hoặc Toggle
+    local Mode = Setting.Mode or "Toggle" 
     local Callback = Setting.Callback or Callback or function() end
     
     local function GetKeyString(key)
@@ -3028,7 +2972,6 @@ function sectionFunction:AddKeyBind(Setting, Callback)
     local ToggleState = false
     local HoldActive = false
     
-    -- UI Elements (BỎ ModeButton)
     local BindFrame = Instance.new("Frame")
     local BindCorner = Instance.new("UICorner")
     local BindBG = Instance.new("Frame")
@@ -3094,7 +3037,6 @@ function sectionFunction:AddKeyBind(Setting, Callback)
     Bindkey.TextSize = 14.000
     Bindkey.TextColor3 = getgenv().UIColor["Text Color"]
     
-    -- Change Key
     Bindkey.MouseButton1Click:Connect(function()
         if Picking then return end
         
@@ -3126,7 +3068,6 @@ function sectionFunction:AddKeyBind(Setting, Callback)
         end)
     end)
     
-    -- Input Began (Press)
     uis.InputBegan:Connect(function(input, gpe)
         if gpe or Picking then return end
         if uis:GetFocusedTextBox() then return end
@@ -3151,7 +3092,6 @@ function sectionFunction:AddKeyBind(Setting, Callback)
         end
     end)
     
-    -- Input Ended (Release) - Only for Hold mode
     uis.InputEnded:Connect(function(input)
         if Picking then return end
         if uis:GetFocusedTextBox() then return end
@@ -3455,45 +3395,39 @@ end
 				end
 				local dragging = false
 				local dragInput
-				local holdTime = 0 -- Time to hold before dragging is enabled
+				local holdTime = 0 
 				local holdStarted = 0
 
-						-- Function to detect the start of dragging (for both mouse and touch)
 				local function onInputBegan(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-						holdStarted = tick() -- Record the time when holding starts
+						holdStarted = tick() 
 						
-								-- Listen for release to stop dragging
 						input.Changed:Connect(function()
 							if input.UserInputState == Enum.UserInputState.End then
 								dragging = false
-								holdStarted = 0 -- Reset the hold timer
+								holdStarted = 0 
 							end
 						end)
 					end
 				end
 						
-						-- Function to detect when dragging stops
 				local function onInputEnded(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						dragging = false
-						holdStarted = 0 -- Reset the hold timer
+						holdStarted = 0 
 					end
 				end
 
-						-- Detect input movement (for both mouse and touch)
 				local function onInputChanged(input)
 					if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 						dragInput = input
 					end
 				end
 						
-						-- Connect the events
 				SliderButton.InputBegan:Connect(onInputBegan)
 				SliderButton.InputEnded:Connect(onInputEnded)
 				SliderButton.InputChanged:Connect(onInputChanged)
 						
-						-- RenderStepped updates the position while dragging
 				RunService.RenderStepped:Connect(function()
 					if holdStarted > 0 and (tick() - holdStarted >= holdTime) and not dragging then
 						dragging = true
